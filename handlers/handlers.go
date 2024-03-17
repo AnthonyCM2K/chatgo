@@ -28,7 +28,7 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 	case "POST":
 		switch ctx.Value(models.Key("path")).(string) {
 		case "registro":
-			return routers.Registro()
+			return routers.Registro(ctx)
 		}
 		//
 	case "GET":
