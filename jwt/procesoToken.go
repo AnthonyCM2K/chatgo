@@ -6,6 +6,7 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/AnthonyCM2K/chatgo/db"
 	"github.com/AnthonyCM2K/chatgo/models"
 	jwt "github.com/golang-jwt/jwt/v5"
 )
@@ -19,7 +20,7 @@ func ProcesosToken(tk string, JWTSign string) (*models.Claim, bool, string, erro
 
 	splitToken := strings.Split(tk, "Bearer")
 	if len(splitToken) != 2 {
-		return &claims, false, string(""), errors.New("Formato de token inválido")
+		return &claims, false, string(""), errors.New("Formato de token invalido")
 
 	}
 
@@ -30,10 +31,16 @@ func ProcesosToken(tk string, JWTSign string) (*models.Claim, bool, string, erro
 	})
 	if err == nil {
 		// Rutina que valida contra la base de datos
+		_, encontrado, _ := db.ChequeoYaExisteUsuario(claims.Email)
+		if encontrado {
+			Email = claims.Email
+			IDUsuario = claims.ID.Hex()
+		}
+		return &claims, encontrado, IDUsuario, nil
 	}
 
 	if !tkn.Valid {
-		return &claims, false, string(""), errors.New("Token Inválido")
+		return &claims, false, string(""), errors.New("Token Invalido")
 	}
 
 	return &claims, false, string(""), err

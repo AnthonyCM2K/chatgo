@@ -25,7 +25,7 @@ func Registro(ctx context.Context) models.RespApi {
 	}
 
 	if len(t.Email) == 0 {
-		r.Message = "Debe especificar el EMail"
+		r.Message = "Debe especificar el Email"
 		fmt.Println(r.Message)
 		return r
 	}
