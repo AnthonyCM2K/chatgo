@@ -33,6 +33,10 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 			return routers.Login(ctx)
 		case "tweet":
 			return routers.GraboTweet(ctx, claim)
+		case "subirAvatar":
+			return routers.UploadImage(ctx, "A", request, claim)
+		case "subirBanner":
+			return routers.UploadImage(ctx, "B", request, claim)
 		}
 		//
 	case "GET":
@@ -41,6 +45,10 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 			return routers.VerPerfil(request)
 		case "leoTweets":
 			return routers.LeoTweets(request)
+		case "obtenerAvatar":
+			return routers.ObtenerImagen(ctx, "A", request, claim)
+		case "obtenerBanner":
+			return routers.ObtenerImagen(ctx, "B", request, claim)
 		}
 		//
 	case "PUT":
