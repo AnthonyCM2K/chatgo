@@ -62,9 +62,11 @@ func Login(ctx context.Context) models.RespApi {
 		StatusCode: 200,
 		Body:       string(token),
 		Headers: map[string]string{
-			"Content-Type":                "application/json",
-			"Access-Control-Allow-Origin": "*",
-			"Set-Cookie":                  cookieString,
+			"Content-Type":                 "application/json",
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+			"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+			"Set-Cookie":                   cookieString,
 		},
 	}
 

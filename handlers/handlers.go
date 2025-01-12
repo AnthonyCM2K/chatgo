@@ -33,6 +33,8 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 			return routers.Login(ctx)
 		case "tweet":
 			return routers.GraboTweet(ctx, claim)
+		case "altaRelacion":
+			return routers.AltaRelacion(ctx, request, claim)
 		case "subirAvatar":
 			return routers.UploadImage(ctx, "A", request, claim)
 		case "subirBanner":
@@ -49,6 +51,12 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 			return routers.ObtenerImagen(ctx, "A", request, claim)
 		case "obtenerBanner":
 			return routers.ObtenerImagen(ctx, "B", request, claim)
+		case "consultaRelacion":
+			return routers.ConsultaRelacion(request, claim)
+		case "listaUsuarios":
+			return routers.ListaUsuarios(request, claim)
+		case "leoTweetsSeguidores":
+			return routers.LeoTweetsSeguidores(request, claim)
 		}
 		//
 	case "PUT":
@@ -61,6 +69,8 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		switch ctx.Value(models.Key("path")).(string) {
 		case "eliminarTweet":
 			return routers.EliminarTweet(request, claim)
+		case "bajaRelacion":
+			return routers.BajaRelacion(request, claim)
 		}
 		//
 	}
